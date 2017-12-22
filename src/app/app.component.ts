@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {JeopardyService } from './jeopardy.service';
 
 @Component({
@@ -9,11 +9,15 @@ import {JeopardyService } from './jeopardy.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
+  hasAnswered: boolean = false;
   questionInfo;
-
+  playerAnswer: string; 
+  playerTotal = 0;
+  
   constructor(private jeopardyService: JeopardyService){}
-
+  
   getDataFromService(){
+    this.hasAnswered = false;
     this.jeopardyService.getQuestionInfo()
       .subscribe(
         questionInfo => {
@@ -21,9 +25,21 @@ export class AppComponent implements OnInit {
         }
       )
   }
-
-  ngOnInit(){
-    this.getDataFromService()
+     
+  clickSubmit() {
+    this.hasAnswered = true;
+    if(this.playerAnswer == this.questionInfo.answer) { 
+      this.playerTotal = this.playerTotal + this.questionInfo.value
+    } 
+    return this.playerTotal
   }
 
-}
+  ngOnInit() {
+    this.getDataFromService()
+  }
+}         
+
+  
+    
+
+
