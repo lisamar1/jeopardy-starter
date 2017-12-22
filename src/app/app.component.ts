@@ -7,8 +7,9 @@ import {JeopardyService } from './jeopardy.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
 
+
+  //info from the api for displaying the data
   questionInfo;
 
   constructor(private jeopardyService: JeopardyService){}
