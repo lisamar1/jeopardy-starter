@@ -1,26 +1,14 @@
 <div style="text-align:center">
-  
-  
-  <h1>Welcome to Jeopardy!!</h1>
-  <h1>Category: {{questionInfo?.category.title}}</h1>
-  <h1>Point Value: {{questionInfo?.value}}</h1>
-  <h1>Question: {{questionInfo?.question}}</h1>
 
-Enter Your Answer: 
-<input [(ngModel)]="playerAnswer">  
-<button (click)="clickSubmit()">Submit Your Answer</button> 
-   <br> 
-<div *ngIf="hasAnswered">
-  <h1>App Answer: {{questionInfo?.answer}}</h1>
-</div>
-  
-    <h1>Score</h1> {{ playerTotal }}
- 
-    <button (click)="getDataFromService()"> Next Question</button>
-  </div>
-   
-  
-    
- 
-        
-        
+    <h1>Welcome to Jeopardy!!</h1>
+    <h1>The Question is: {{questionInfo?.question}}</h1>
+    <h1>The Category is: {{questionInfo?.category.title}}</h1>
+    <h1>The Point Value is: {{questionInfo?.value}}</h1>
+    <h1>Your Score is: {{ scoreKeeper.usersScore }}</h1>
+    <div *ngIf="questionInfo?.answer">
+
+        <h1>The Answer is: {{ questionInfo?.answer }}</h1>
+    </div>
+
+    <app-editjeopardy #scoreKeeper (answerHasBeenScored)="getDataFromService()" [questionInfo]="questionInfo">
+    </app-editjeopardy>
